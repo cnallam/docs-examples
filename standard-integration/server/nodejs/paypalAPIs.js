@@ -9,7 +9,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 8888;
 
 // Create an order (SetExpressCheckout equivalent)
-app.post("/api/orders/create", async (req, res) => {
+app.post("/api/orders", async (req, res) => {
   try {
     const { returnUrl, cancelUrl, currencyCode, value, invoiceNumber } = req.body;
     const cart = {
