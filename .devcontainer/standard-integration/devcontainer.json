@@ -27,6 +27,10 @@
     "PAYPAL_CLIENT_SECRET": {
       "description": "Sandbox secret of the application.",
       "documentationUrl": "https://developer.paypal.com/dashboard/applications/sandbox"
+    },
+    "PAYPAL_BASE_URL": {
+      "description": "Base URL of the Sandbox/Prod.",
+      "documentationUrl": "https://developer.paypal.com/tools/sandbox/"
     }
   },
   "customizations": {
