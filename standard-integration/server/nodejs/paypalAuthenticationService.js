@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 import 'dotenv/config';
 
 // Read environment variables
-const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, BASE_URL } = process.env;
+const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PAYPAL_BASE_URL } = process.env;
 
 // Cache to store the access token
 let accessTokenCache = {
@@ -22,7 +22,7 @@ const generateAccessToken = async () => {
     const auth = Buffer.from(
       `${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`,
     ).toString('base64');
-    const response = await fetch(`${BASE_URL}/v1/oauth2/token`, {
+    const response = await fetch(`${PAYPAL_BASE_URL}/v1/oauth2/token`, {
       method: 'POST',
       body: 'grant_type=client_credentials',
       headers: {
