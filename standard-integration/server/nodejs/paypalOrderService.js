@@ -14,7 +14,6 @@ const createOrder = async (req, res) => {
     const cancelURL = "";
     const currencyCode = "USD";
     const value = "100.00";
-    const invoiceNumber = "invnum";
 
     // Construct the order payload based on the mappings provided
     const orderData = {
@@ -31,7 +30,6 @@ const createOrder = async (req, res) => {
               }
             }
           },
-          invoice_id: invoiceNumber,
           description: 'Order description', // Assuming a static description; adjust as needed
           shipping: {
             name: {
@@ -102,7 +100,6 @@ const updateOrder = async (req, res, orderID) => {
   // Extract relevant parameters from nvpParams
   const amount = "110.00";
   const currencyCode = "USD";
-  const invoiceNumber = "invNum";
 
   // Construct the patch request payload based on the mapping rules
   const patchData = [
@@ -113,11 +110,6 @@ const updateOrder = async (req, res, orderID) => {
         currency_code: currencyCode,
         value: amount
       }
-    },
-    {
-      op: "add",
-      path: "/purchase_units/@reference_id=='default'/invoice_id",
-      value: invoiceNumber
     }
     // Add more mappings as needed based on the provided mapping rules
   ];
