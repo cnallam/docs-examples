@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import 'dotenv/config';
 import { getValidAccessToken, generateAccessToken } from './paypalAuthenticationService.js';
 
-const { BASE_URL } = process.env;
+const { PAYPAL_BASE_URL } = process.env;
 
 /**
  * Create an order using PayPal Orders V2 REST API.
@@ -54,7 +54,7 @@ const createOrder = async (req, res) => {
     var accessToken = await getValidAccessToken();
 
     // Make the API request to PayPal
-    var response = await fetch(`${BASE_URL}/v2/checkout/orders`, {
+    var response = await fetch(`${PAYPAL_BASE_URL}/v2/checkout/orders`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ const createOrder = async (req, res) => {
     // If the response status is 403, try to generate a new access token and retry the request
     if (response.status === 403) {
       accessToken = await getValidAccessToken(true); // Force token refresh
-      response = await fetch(`${BASE_URL}/v2/checkout/orders`, {
+      response = await fetch(`${PAYPAL_BASE_URL}/v2/checkout/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ const createOrder = async (req, res) => {
  */
 const updateOrder = async (req, res, orderID) => {
   var accessToken = await getValidAccessToken();
-  const url = `${BASE_URL}/v2/checkout/orders/${orderID}`;
+  const url = `${PAYPAL_BASE_URL}/v2/checkout/orders/${orderID}`;
 
   // Extract relevant parameters from nvpParams
   const amount = "110.00";
@@ -156,7 +156,7 @@ const updateOrder = async (req, res, orderID) => {
  */
 const captureOrder = async (orderID) => {
   const accessToken = await generateAccessToken();
-  const url = `${BASE_URL}/v2/checkout/orders/${orderID}/capture`;
+  const url = `${PAYPAL_BASE_URL}/v2/checkout/orders/${orderID}/capture`;
 
   const response = await fetch(url, {
     method: "POST",
@@ -179,7 +179,7 @@ const captureOrder = async (orderID) => {
  */
 const getOrderDetails = async (orderID) => {
   const accessToken = await generateAccessToken();
-  const url = `${BASE_URL}/v2/checkout/orders/${orderID}`;
+  const url = `${PAYPAL_BASE_URL}/v2/checkout/orders/${orderID}`;
 
   const response = await fetch(url, {
     method: "GET",
