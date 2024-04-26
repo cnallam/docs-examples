@@ -1,0 +1,21 @@
+{
+    "require": {
+        "php": "^7.4|^8.0",
+        "slim/slim": "^4.0",
+        "guzzlehttp/guzzle": "^7.0",
+        "ext-curl": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "7.4.3"
+        }
+    }
+}

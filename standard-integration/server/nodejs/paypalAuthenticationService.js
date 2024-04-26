@@ -1,8 +1,9 @@
 /*
 - Environment variables `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, and `BASE_URL` are read from the `.env` file using the `dotenv` package.
 - The `generateAccessToken` function authenticates with PayPal using the client credentials and stores the access token and its expiry time in a cache.
+- The `accessTokenCache` object stores the current access token and its expiry time.
 - The `getValidAccessToken` function checks if the current token is valid for at least another 2 minutes. If not, it generates a new token.
-- A background process using `setInterval` checks the validity of the access token every minute and refreshes it if necessary.
+- The `startAccessTokenValidityCheck` function sets up a background process that runs every minute to ensure the token is always valid.
 - The `getValidAccessToken` method is exported for use in other parts of the backend service.
 */
 // Import required dependencies
@@ -68,14 +69,21 @@ const getValidAccessToken = async () => {
   }
 };
 
-// Set up a background process to check the validity of the access token
-setInterval(async () => {
-  try {
-    await getValidAccessToken();
-  } catch (error) {
-    console.error('Error refreshing access token:', error);
-  }
-}, 60000); // Check every minute
+/**
+ * Background process to check the validity of the access token every minute.
+ */
+const startAccessTokenValidityCheck = () => {
+  setInterval(async () => {
+    try {
+      await getValidAccessToken();
+    } catch (error) {
+      console.error("Error refreshing access token:", error);
+    }
+  }, 60000); // Check every minute
+};
+
+// Start the background process when the module is loaded
+startAccessTokenValidityCheck();
 
 // Export the method to get a valid access token
 export { getValidAccessToken, generateAccessToken };

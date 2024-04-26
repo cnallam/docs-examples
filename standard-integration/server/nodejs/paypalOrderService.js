@@ -14,8 +14,8 @@ const { PAYPAL_BASE_URL } = process.env;
 const createOrder = async (req, res) => {
   try {
     // Extract relevant parameters from the request
-    const returnURL = "";
-    const cancelURL = "";
+    const returnURL = "https://example.com/return";
+    const cancelURL = "https://example.com/cancel";
     const currencyCode = "USD";
     const value = "100.00";
 
