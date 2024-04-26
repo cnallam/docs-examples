@@ -1,0 +1,44 @@
+// For more details, see https://aka.ms/devcontainer.json.
+{
+  "name": "PayPal Standard Integration - Node",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/standard-integration",
+  // Use 'onCreateCommand' to run commands when creating the container.
+  "onCreateCommand": "bash ../.devcontainer/standard-integration/welcome-message.sh",
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "cd server/node/ && npm install",
+  // Use 'postAttachCommand' to run commands when attaching to the container.
+  "postAttachCommand": {
+    "Start server": "cd server/node/ && CI=true npx kill-port --yes 8888 && npm start"
+  },
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [8888],
+  "portsAttributes": {
+    "8888": {
+      "label": "Preview of Standard Checkout Flow",
+      "onAutoForward": "openBrowserOnce"
+    }
+  },
+  "secrets": {
+    "PAYPAL_CLIENT_ID": {
+      "description": "Sandbox client ID of the application.",
+      "documentationUrl": "https://developer.paypal.com/dashboard/applications/sandbox"
+    },
+    "PAYPAL_CLIENT_SECRET": {
+      "description": "Sandbox secret of the application.",
+      "documentationUrl": "https://developer.paypal.com/dashboard/applications/sandbox"
+    },
+    "PAYPAL_BASE_URL": {
+      "description": "Base URL of the Sandbox/Prod.",
+      "documentationUrl": "https://developer.paypal.com/tools/sandbox/"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["vsls-contrib.codetour","PayPal.vscode-paypal"],
+      "settings": {
+        "git.openRepositoryInParentFolders": "always"
+      }
+    }
+  }
+}
