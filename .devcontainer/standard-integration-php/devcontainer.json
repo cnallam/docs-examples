@@ -4,7 +4,7 @@
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/standard-integration",
   "image": "mcr.microsoft.com/devcontainers/php:1-8.2-bullseye",
   // Use 'onCreateCommand' to run commands when creating the container.
-  "onCreateCommand": "bash ../.devcontainer/standard-integration/welcome-message.sh",
+  "onCreateCommand": "bash ../.devcontainer/standard-integration-php/welcome-message.sh",
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "cd server/php/ && php composer install",
   // Use 'postAttachCommand' to run commands when attaching to the container.
